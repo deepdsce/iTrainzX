@@ -7,11 +7,11 @@ import com.trupt.itrainz.model.request.Request;
 
 public abstract class TrAsyncTask<IN extends Request, Result> extends AsyncTask<IN, Void, Result> {
 
-	protected AsyncTaskCompletionListener<Result> listener;
+	protected AsyncTaskCompletionListener<Result> asyncTaskCompletionListener;
 	protected Error error;
 	
-	public void setListener(AsyncTaskCompletionListener<Result> listener) {
-		this.listener = listener;
+	public void setAsyncTaskCompletionListener(AsyncTaskCompletionListener<Result> listener) {
+		this.asyncTaskCompletionListener = listener;
 	}
 	
 	@Override
@@ -22,12 +22,12 @@ public abstract class TrAsyncTask<IN extends Request, Result> extends AsyncTask<
 	@Override
 	protected void onPostExecute(Result result) {
 		super.onPostExecute(result);
-		if(listener != null) {
+		if(asyncTaskCompletionListener != null) {
 			if(result != null) {
-				listener.onSuccess(result);
+				asyncTaskCompletionListener.onSuccess(result);
 			} else {
 				//TODO: set default error if no error set 
-				listener.onFailure(error);
+				asyncTaskCompletionListener.onFailure(error);
 			}
 		}
 	}

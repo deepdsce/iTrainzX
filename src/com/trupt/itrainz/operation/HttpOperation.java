@@ -19,7 +19,7 @@ public class HttpOperation extends Operation {
 	@Override
 	public void cancelOperation() {
 		if(asyncTask != null) {
-			asyncTask.setListener(null);
+			asyncTask.setAsyncTaskCompletionListener(null);
 			asyncTask.cancel(true);
 		}
 	}
@@ -47,7 +47,7 @@ public class HttpOperation extends Operation {
 			break;
 		}
 		if(asyncTask != null) {
-			asyncTask.setListener(this);
+			asyncTask.setAsyncTaskCompletionListener(this);
 			asyncTask.execute(this.request);
 		}
 	}
