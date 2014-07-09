@@ -1,14 +1,15 @@
 package com.trupt.itrainz.model;
 
+import com.trupt.itrainz.ui.fragment.FragmentEnum;
+
 public class Menu {
 
 	private String name;
+	private FragmentEnum fragmentEnum;
 	
-	public Menu() {
-	}
-	
-	public Menu(String name) {
+	public Menu(String name, FragmentEnum fragmentEnum) {
 		this.name = name;
+		this.fragmentEnum = fragmentEnum;
 	}
 
 	public String getName() {
@@ -19,9 +20,17 @@ public class Menu {
 		this.name = name;
 	}
 
+	public FragmentEnum getFragmentEnum() {
+		return fragmentEnum;
+	}
+
+	public void setFragmentEnum(FragmentEnum fragmentEnum) {
+		this.fragmentEnum = fragmentEnum;
+	}
+
 	@Override
 	public String toString() {
-		return "Menu [name=" + name + "]";
+		return "Menu [name=" + name + ", fragmentEnum=" + fragmentEnum + "]";
 	}
 
 }

@@ -51,7 +51,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener {
 			fragmentEnum = FragmentEnum.HOME;
 			break;
 		}
-		((MainActivity)getActivity()).onFragmentAddRequest(fragmentEnum);
+		((MainActivity)getActivity()).onFragmentAddRequest(fragmentEnum, FragmentTransitionType.REPLACE, true);
 	}
 	
 	private void init(View view) {

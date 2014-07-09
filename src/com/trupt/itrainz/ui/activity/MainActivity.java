@@ -8,6 +8,7 @@ import com.trupt.itrainz.R;
 import com.trupt.itrainz.ui.fragment.BaseFragment;
 import com.trupt.itrainz.ui.fragment.FragmentEnum;
 import com.trupt.itrainz.ui.fragment.FragmentFactory;
+import com.trupt.itrainz.ui.fragment.FragmentTransitionType;
 import com.trupt.itrainz.ui.fragment.OnFragmentChangeRequestListener;
 
 public class MainActivity extends BaseActivity implements OnFragmentChangeRequestListener {
@@ -18,15 +19,23 @@ public class MainActivity extends BaseActivity implements OnFragmentChangeReques
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		this.onFragmentAddRequest(FragmentEnum.HOME);
+		this.onFragmentAddRequest(FragmentEnum.HOME, FragmentTransitionType.REPLACE, false);
 	}
 
 	@Override
-	public void onFragmentAddRequest(FragmentEnum fragmentEnum) {
+	public void onFragmentAddRequest(FragmentEnum fragmentEnum, FragmentTransitionType fragmentTransitionType, boolean addToBackStack) {
 		FragmentManager fragmentManager = getFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		this.fragment = FragmentFactory.getFragment(fragmentEnum);
-		fragmentTransaction.replace(R.id.layoutMain, this.fragment);
+		if(fragmentTransitionType == FragmentTransitionType.REPLACE) {
+			fragmentTransaction.replace(R.id.layoutMain, this.fragment);
+		} else {
+			fragmentTransaction.add(R.id.layoutMain, this.fragment);
+		}
+		if(addToBackStack) {
+			fragmentTransaction.addToBackStack(fragment.getClass().getName());
+		}
+		fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 		fragmentTransaction.commit();
 	}
 

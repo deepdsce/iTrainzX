@@ -12,7 +12,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:ems="10" 
-        android:inputType="numberDecimal">
+        android:inputType="numberDecimal"
+        android:layout_margin="5dp"
+        >
 
     </EditText>
 
@@ -24,6 +26,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/editTextPnr"
         android:text="Get Status" 
-        android:enabled="false"/>
+        android:enabled="false"
+        android:layout_margin="5dp"/>
 
 </RelativeLayout>
