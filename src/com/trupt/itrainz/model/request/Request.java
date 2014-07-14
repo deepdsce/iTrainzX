@@ -5,12 +5,6 @@ public abstract class Request {
 	
 	protected RequestTypeEnum requestType;
 
-	public RequestTypeEnum getRequestType() {
-		return requestType;
-	}
-
-	public void setRequestType(RequestTypeEnum requestType) {
-		this.requestType = requestType;
-	}
+	public abstract RequestTypeEnum getRequestType();
 	
 }

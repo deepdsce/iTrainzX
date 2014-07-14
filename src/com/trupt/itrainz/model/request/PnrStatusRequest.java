@@ -7,13 +7,18 @@ import java.util.Map;
 import java.util.Random;
 
 
-public class PnrRequest extends HttpRequest {
+public class PnrStatusRequest extends HttpRequest {
 
 	private String pnrNumber;
 	
-	public PnrRequest(String pnString) {
+	public PnrStatusRequest(String pnString) {
 		this.pnrNumber = pnString;
 		this.createPnrRequest();
+	}
+	
+	@Override
+	public RequestTypeEnum getRequestType() {
+		return RequestTypeEnum.PNR_STATUS_REQUEST;
 	}
 	
 	public String getPnrNumber() {
@@ -38,7 +43,6 @@ public class PnrRequest extends HttpRequest {
 			this.setMethodEnum(HttpMethodEnum.POST);
 			this.setMapParameters(params);
 			this.setMapCookies(null);
-			this.setRequestType(RequestTypeEnum.PNR_STATUS);
 		} catch (MalformedURLException e) {
 		}
 	}

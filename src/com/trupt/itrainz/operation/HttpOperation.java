@@ -7,8 +7,8 @@ import com.trupt.itrainz.model.result.Result;
 
 public class HttpOperation extends Operation {
 	
-	public HttpOperation(Request request, OperationStatusListener opStatusListener) {
-		super(request, opStatusListener);
+	public HttpOperation(Request request) {
+		super(request);
 	}
 	
 	@Override
@@ -28,7 +28,7 @@ public class HttpOperation extends Operation {
 	public void onSuccess(Result result) {
 		asyncTask = null;
 		if(operationStatusListener != null) {
-			operationStatusListener.onSuccess(result);
+			operationStatusListener.onSuccess(this, result);
 		}
 	}
 	
@@ -36,13 +36,13 @@ public class HttpOperation extends Operation {
 	public void onFailure(Error error) {
 		asyncTask = null;
 		if(operationStatusListener != null) {
-			operationStatusListener.onFailure(error);
+			operationStatusListener.onFailure(this, error);
 		}
 	}
 	
 	private void startRequest() {
 		switch (this.request.getRequestType()) {
-		case PNR_STATUS:
+		case PNR_STATUS_REQUEST:
 			asyncTask = new IRHttpRequestAsyncTask<>();
 			break;
 		}

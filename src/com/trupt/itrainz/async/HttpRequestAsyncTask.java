@@ -4,9 +4,9 @@ import com.google.gson.Gson;
 import com.trupt.itrainz.common.Error;
 import com.trupt.itrainz.model.request.HttpRequest;
 import com.trupt.itrainz.model.request.Request;
-import com.trupt.itrainz.model.result.PnrStatus;
+import com.trupt.itrainz.model.result.PnrStatusResult;
 
-public class HttpRequestAsyncTask<IN extends Request, Result> extends TrAsyncTask<IN, Result> {
+public class HttpRequestAsyncTask<IN extends Request, Result> extends BaseAsyncTask<IN, Result> {
 
 	protected HttpRequest request;
 	
@@ -38,8 +38,8 @@ public class HttpRequestAsyncTask<IN extends Request, Result> extends TrAsyncTas
 	protected Class getResultClass() {
 		Class clazz = null;
 		switch (request.getRequestType()) {
-		case PNR_STATUS:
-			clazz = PnrStatus.class;
+		case PNR_STATUS_REQUEST:
+			clazz = PnrStatusResult.class;
 			break;
 		}
 		return clazz;

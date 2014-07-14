@@ -3,7 +3,7 @@ package com.trupt.itrainz.app;
 import android.app.Application;
 import android.content.Context;
 
-public class TrApplication extends Application {
+public class BaseApplication extends Application {
 
 	private static Context appContext;
 	

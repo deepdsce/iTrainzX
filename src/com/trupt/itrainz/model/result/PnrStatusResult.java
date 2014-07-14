@@ -2,7 +2,7 @@ package com.trupt.itrainz.model.result;
 
 import java.util.ArrayList;
 
-public class PnrStatus extends Result {
+public class PnrStatusResult extends Result {
 	private String pnrNumber;
 	private String trainNumber;
 	private String trainName;
@@ -13,7 +13,12 @@ public class PnrStatus extends Result {
 	private String boardingPointStation;
 	private String classs;
 	private boolean chartPrepared;
-	private ArrayList<SeatStatus> seatStatus;
+	private ArrayList<SeatStatusResult> seatStatus;
+	
+	@Override
+	public ResultTypeEnum getResultType() {
+		return ResultTypeEnum.PNR_STATUS_RESULT;
+	}
 	
 	public String getPnrNumber() {
 		return pnrNumber;
@@ -75,10 +80,10 @@ public class PnrStatus extends Result {
 	public void setChartPrepared(boolean chartPrepared) {
 		this.chartPrepared = chartPrepared;
 	}
-	public ArrayList<SeatStatus> getSeatStatus() {
+	public ArrayList<SeatStatusResult> getSeatStatus() {
 		return seatStatus;
 	}
-	public void setSeatStatus(ArrayList<SeatStatus> pnrStatus) {
+	public void setSeatStatus(ArrayList<SeatStatusResult> pnrStatus) {
 		this.seatStatus = pnrStatus;
 	}
 	@Override

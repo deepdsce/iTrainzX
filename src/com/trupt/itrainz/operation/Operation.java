@@ -1,22 +1,21 @@
 package com.trupt.itrainz.operation;
 
-import com.trupt.itrainz.async.TrAsyncTask;
-import com.trupt.itrainz.async.TrAsyncTask.AsyncTaskCompletionListener;
+import com.trupt.itrainz.async.BaseAsyncTask;
+import com.trupt.itrainz.async.BaseAsyncTask.AsyncTaskCompletionListener;
 import com.trupt.itrainz.common.Error;
 import com.trupt.itrainz.model.request.Request;
 import com.trupt.itrainz.model.result.Result;
 
 public abstract class Operation implements AsyncTaskCompletionListener<Result> {
 
-	protected TrAsyncTask<Request, Result> asyncTask;
+	protected BaseAsyncTask<Request, Result> asyncTask;
 	protected OperationStatusListener operationStatusListener;
 	protected Request request;
 	
 	public abstract void startOperation();
 	public abstract void cancelOperation();
 	
-	public Operation(Request request, OperationStatusListener opStatusListener) {
-		this.operationStatusListener = opStatusListener;
+	public Operation(Request request) {
 		this.request = request;
 	}
 	
@@ -24,11 +23,14 @@ public abstract class Operation implements AsyncTaskCompletionListener<Result> {
 		return OperationTypeEnum.OP;
 	}
 	
-
+	public void setOperationStatusListener(
+			OperationStatusListener operationStatusListener) {
+		this.operationStatusListener = operationStatusListener;
+	}
 	
 	public interface OperationStatusListener {
-		void onSuccess(Result result);
-		void onFailure(Error error);
+		void onSuccess(Operation operation, Result result);
+		void onFailure(Operation operation, Error error);
 		void onCancel();
 	}
 	

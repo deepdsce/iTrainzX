@@ -12,6 +12,7 @@ public class MenuUtil {
 		menus.add(new Menu("PNR Status", FragmentEnum.PNR_STATUS_REQUEST));
 		menus.add(new Menu("Train Between Station", FragmentEnum.HOME));
 		menus.add(new Menu("Seat Availability", FragmentEnum.HOME));
+		menus.add(new Menu("Live Availability", FragmentEnum.HOME));
 		menus.add(new Menu("Help", FragmentEnum.HOME));
 		return menus;
 	}

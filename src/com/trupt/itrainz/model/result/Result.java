@@ -1,9 +1,14 @@
 package com.trupt.itrainz.model.result;
 
-public abstract class Result {
+import java.io.Serializable;
 
+public abstract class Result implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
 	protected String errorMessage;
-
+	protected ResultTypeEnum resultType;
+	
 	public String getErrorMessage() {
 		return errorMessage;
 	}
@@ -11,5 +16,7 @@ public abstract class Result {
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
+	
+	public abstract ResultTypeEnum getResultType();
 
 }

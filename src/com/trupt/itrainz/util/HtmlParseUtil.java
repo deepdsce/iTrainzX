@@ -8,13 +8,13 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.trupt.itrainz.common.Error;
-import com.trupt.itrainz.model.result.PnrStatus;
-import com.trupt.itrainz.model.result.SeatStatus;
+import com.trupt.itrainz.model.result.PnrStatusResult;
+import com.trupt.itrainz.model.result.SeatStatusResult;
 
 public class HtmlParseUtil {
 	
-	public static PnrStatus parsePNRData(Document document, String pnr) {
-		PnrStatus pnrStatus = new PnrStatus();
+	public static PnrStatusResult parsePNRData(Document document, String pnr) {
+		PnrStatusResult pnrStatus = new PnrStatusResult();
 		pnrStatus.setPnrNumber(pnr);
 		String errMsg = checkForErrors(document);
 		if(errMsg == null) {
@@ -46,7 +46,7 @@ public class HtmlParseUtil {
 		return errorMsg;
 	}
 	
-	private static void updatePnrStatus(PnrStatus pnrStatus, ArrayList<ArrayList<String>> pnrJourneyDetailTableData, ArrayList<ArrayList<String>> pnrStatusTableData) {
+	private static void updatePnrStatus(PnrStatusResult pnrStatus, ArrayList<ArrayList<String>> pnrJourneyDetailTableData, ArrayList<ArrayList<String>> pnrStatusTableData) {
 		//retrieve data from pnrJourneyDetailTableData
 		ArrayList<String> data = pnrJourneyDetailTableData.get(2);
 		pnrStatus.setTrainNumber(data.remove(0).replaceFirst("[\\*]", ""));
@@ -58,7 +58,7 @@ public class HtmlParseUtil {
 	    pnrStatus.setBoardingPointStation(data.remove(0));
 	    pnrStatus.setClasss(data.remove(0));
 	    
-	    ArrayList<SeatStatus> listSeatStatus = new ArrayList<>();
+	    ArrayList<SeatStatusResult> listSeatStatus = new ArrayList<>();
 	    //retrieve data from pnrStatusTableData
 	    for(int i = 1; i < pnrStatusTableData.size(); i++) {
 	    	ArrayList<String> listData = pnrStatusTableData.get(i);
@@ -68,7 +68,7 @@ public class HtmlParseUtil {
 	    		}
 	    		break;
 	    	}
-	    	SeatStatus seatStatus = new SeatStatus();
+	    	SeatStatusResult seatStatus = new SeatStatusResult();
 	    	seatStatus.setBookingStatus(listData.get(1));
 	    	seatStatus.setCurrentStatus(listData.get(2));
 	    	listSeatStatus.add(seatStatus);

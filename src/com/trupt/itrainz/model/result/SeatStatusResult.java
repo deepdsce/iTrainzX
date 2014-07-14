@@ -1,6 +1,6 @@
 package com.trupt.itrainz.model.result;
 
-public class SeatStatus {
+public class SeatStatusResult {
 	private String bookingStatus;
 	private String currentStatus;
 	public String getBookingStatus() {

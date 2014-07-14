@@ -5,6 +5,8 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.trupt.itrainz.R;
+import com.trupt.itrainz.core.Constants;
+import com.trupt.itrainz.model.result.Result;
 import com.trupt.itrainz.ui.fragment.BaseFragment;
 import com.trupt.itrainz.ui.fragment.FragmentEnum;
 import com.trupt.itrainz.ui.fragment.FragmentFactory;
@@ -19,11 +21,11 @@ public class MainActivity extends BaseActivity implements OnFragmentChangeReques
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		this.onFragmentAddRequest(FragmentEnum.HOME, FragmentTransitionType.REPLACE, false);
+		this.onFragmentAddRequest(FragmentEnum.HOME, FragmentTransitionType.REPLACE, false, null);
 	}
 
 	@Override
-	public void onFragmentAddRequest(FragmentEnum fragmentEnum, FragmentTransitionType fragmentTransitionType, boolean addToBackStack) {
+	public void onFragmentAddRequest(FragmentEnum fragmentEnum, FragmentTransitionType fragmentTransitionType, boolean addToBackStack, Result result) {
 		FragmentManager fragmentManager = getFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		this.fragment = FragmentFactory.getFragment(fragmentEnum);
@@ -35,13 +37,15 @@ public class MainActivity extends BaseActivity implements OnFragmentChangeReques
 		if(addToBackStack) {
 			fragmentTransaction.addToBackStack(fragment.getClass().getName());
 		}
+		Bundle bundle = new Bundle();
+		bundle.putSerializable(Constants.FragmentArgumentExtra.INPUT_DATA, result);
+		this.fragment.setArguments(bundle);
 		fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 		fragmentTransaction.commit();
 	}
 
 	@Override
 	public void onFragmentRemoveRequest(FragmentEnum fragmentEnum) {
-		
 	}
 	
 }

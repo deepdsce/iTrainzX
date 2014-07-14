@@ -19,7 +19,7 @@ import com.trupt.itrainz.model.request.Request;
 import com.trupt.itrainz.model.result.PnrStatusResult;
 import com.trupt.itrainz.util.HtmlParseUtil;
 
-public class IRHttpRequestAsyncTask<IN extends Request, Result> extends HttpRequestAsyncTask<IN, Result> {
+public class IRCTCHttpRequestAsyncTask<IN extends Request, Result> extends HttpRequestAsyncTask<IN, Result> {
 	
 	@Override
 	protected Result doInBackground(IN... params) {

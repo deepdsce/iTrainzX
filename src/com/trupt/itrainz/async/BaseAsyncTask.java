@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import com.trupt.itrainz.common.Error;
 import com.trupt.itrainz.model.request.Request;
 
-public abstract class TrAsyncTask<IN extends Request, Result> extends AsyncTask<IN, Void, Result> {
+public abstract class BaseAsyncTask<IN extends Request, Result> extends AsyncTask<IN, Void, Result> {
 
 	protected AsyncTaskCompletionListener<Result> asyncTaskCompletionListener;
 	protected Error error;

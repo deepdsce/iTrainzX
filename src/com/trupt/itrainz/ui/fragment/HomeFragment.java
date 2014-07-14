@@ -3,7 +3,6 @@ package com.trupt.itrainz.ui.fragment;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 
 import com.trupt.itrainz.R;
 import com.trupt.itrainz.model.Menu;
-import com.trupt.itrainz.ui.activity.MainActivity;
 import com.trupt.itrainz.util.MenuUtil;
 
 
@@ -24,20 +22,6 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener {
 	private ListView listViewMainMenu;
 	private ArrayList<Menu> listMenus;
 	private MainMenuAdapter adapter;
-	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_main, null);
-		init(view);
-		setup(view);
-		return view;
-	}
-	
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-	}
 	
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,	long id) {
@@ -51,10 +35,13 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener {
 			fragmentEnum = FragmentEnum.HOME;
 			break;
 		}
-		((MainActivity)getActivity()).onFragmentAddRequest(fragmentEnum, FragmentTransitionType.REPLACE, true);
+		if(getActivity() instanceof OnFragmentChangeRequestListener) {
+			((OnFragmentChangeRequestListener)getActivity()).onFragmentAddRequest(fragmentEnum, FragmentTransitionType.REPLACE, true, null);
+		}
 	}
 	
-	private void init(View view) {
+	@Override
+	protected void init(View view) {
 		listViewMainMenu = (ListView) view.findViewById(R.id.listViewMainMenu);
 		listViewMainMenu.setOnItemClickListener(this);
 		listMenus = new ArrayList<>();
@@ -62,9 +49,15 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener {
 		listViewMainMenu.setAdapter(adapter);
 	}
 	
-	private void setup(View view) {
+	@Override
+	protected void setup() {
 		listMenus.addAll(MenuUtil.getMenus());
 		adapter.notifyDataSetChanged();
+	}
+	
+	@Override
+	protected int getLayoutResource() {
+		return R.layout.fragment_main;
 	}
 	
 	
